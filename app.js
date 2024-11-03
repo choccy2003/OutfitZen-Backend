@@ -15,7 +15,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(cors({
-  origin: 'https://stylian-ecommerce.vercel.app/', 
+  origin: 'https://stylian-ecommerce.vercel.app', 
   credentials: true 
 }));
 app.use(logger('dev'));
