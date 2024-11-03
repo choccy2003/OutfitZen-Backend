@@ -142,11 +142,8 @@ var transporter = nodemailer.createTransport({
         const match = await bcrypt.compare(userPassword,userInformation.userPassword)
         if(match){
             const token = jwt.sign({userId:userInformation._id},process.env.SECRET_KEY,{expiresIn:'30d'})
-            res.cookie('token',token,{
-                httpOnly:true,
-                secure:false,
-                maxAge: 1000 * 60 * 60 * 24 * 60
-              })
+            const maxAgeInSeconds = 1000 * 60 * 60 * 24 * 60
+            res.setHeader('Set-Cookie', `token=${token}; HttpOnly; Secure; SameSite=None; Max-Age=${maxAgeInSeconds}`);
               console.log(token)
               res.status(200).json({message:"Loged In Successfully"})
         }
